@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(pnpm run:*)",
+      "Bash(cat:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm dlx shadcn@canary add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
