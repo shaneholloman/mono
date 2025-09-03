@@ -96,10 +96,10 @@ import { Button } from "@workspace/ui/components/button"
 
 Setup Steps
 
-- Visit https://github.com/apps/renovate and click Install.
+- Visit <https://github.com/apps/renovate> and click Install.
 - Choose your personal account (top-left selector), select “Only select repositories,” pick this repo, and confirm.
 - Renovate reads `renovate.json` and opens PRs; your existing CI validates them.
-- First-time users may be asked to register and then redirected to the Mend developer portal (for example: https://developer.mend.io/github/<your-username>).
+- First-time users may be asked to register and then redirected to the Mend developer portal (for example: <https://developer.mend.io/github/{{Username}}>).
 
 ## Linting
 
