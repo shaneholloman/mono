@@ -94,6 +94,13 @@ import { Button } from "@workspace/ui/components/button"
 - Enable the Renovate GitHub App on this repo (or org).
 - Renovate opens PRs; existing CI runs on them. Minor/patch devDependencies may auto‑merge if checks pass.
 
+Setup Steps
+
+- Visit https://github.com/apps/renovate and click Install.
+- Choose your personal account (top-left selector), select “Only select repositories,” pick this repo, and confirm.
+- Renovate reads `renovate.json` and opens PRs; your existing CI validates them.
+- First-time users may be asked to register and then redirected to the Mend developer portal (for example: https://developer.mend.io/github/<your-username>).
+
 ## Linting
 
 - ESLint 9 flat config is used per package:
