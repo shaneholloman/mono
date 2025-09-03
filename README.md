@@ -46,8 +46,10 @@ Browser will display the default Next.js page:
 
 ## Usage
 
+This template is set up for the pre-release (canary) of `shadcn/ui` compatible with React 19. Use the canary tag for consistency with this repo:
+
 ```sh
-pnpm dlx shadcn@latest init
+pnpm dlx shadcn@canary init
 ```
 
 ## Adding components
@@ -55,7 +57,7 @@ pnpm dlx shadcn@latest init
 To add components to your app, run the following command at the root of your `web` app:
 
 ```sh
-pnpm dlx shadcn@latest add button -c apps/web
+pnpm dlx shadcn@canary add button -c apps/web
 ```
 
 This will place the ui components in the `packages/ui/src/components` directory.
@@ -71,3 +73,45 @@ To use the components in your app, import them from the `ui` package.
 ```tsx
 import { Button } from "@workspace/ui/components/button"
 ```
+
+## Monorepo scripts
+
+- Build all: `pnpm build`
+- Dev server: `pnpm dev` (Next.js app under `apps/web`)
+- Lint all packages: `pnpm lint`
+- Lint one package: `pnpm turbo run lint --filter <package_name>`
+- Type-check all packages: `pnpm typecheck`
+- Type-check one package: `pnpm turbo run typecheck --filter <package_name>`
+
+## Linting
+
+- ESLint 9 flat config is used per package:
+  - `apps/web/eslint.config.js` extends `@workspace/eslint-config/next-js`
+  - `packages/ui/eslint.config.js` extends `@workspace/eslint-config/react-internal`
+- Root has `eslint.config.js` that ignores all files to avoid accidental root linting.
+- Shared config lives in `packages/eslint-config`.
+
+## Adding apps and packages
+
+- New Next.js app under `apps/`:
+  - `pnpm dlx create-next-app@latest apps/<app_name> --ts`
+  - Add `lint` and `typecheck` scripts similar to `apps/web/package.json`.
+- New internal library under `packages/`:
+  - Create `packages/<lib_name>` and reuse shared configs (`@workspace/typescript-config`, `@workspace/eslint-config`).
+  - Add a `lint` script: `eslint . --max-warnings 0`.
+
+## Testing
+
+Tests are not set up yet in this template. Recommended next steps:
+
+- Libraries (`packages/*`): add Vitest and a `test` script; wire a `test` task in `turbo.json`.
+- App (`apps/web`): consider Playwright or component tests.
+- For now, rely on `pnpm lint` and TypeScript checks.
+
+## PR checklist
+
+- Title format: `[<package_name>] <Title>`
+- Before merging:
+  - Lint all or targeted package: `pnpm lint` or `pnpm turbo run lint --filter <package_name>`
+  - Type-check the app (and any package with a script): `pnpm --filter web run typecheck`
+  - When tests exist: `pnpm turbo run test --filter <package_name>`
