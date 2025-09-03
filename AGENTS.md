@@ -25,6 +25,41 @@
   - Location: `.github/workflows/ci.yml`
   - Steps: install, lint, typecheck
 
+## CI Learnings
+
+- Order matters: set up Node, then pnpm.
+  - Use Corepack to activate the pnpm version from `package.json` (`packageManager`).
+  - Example: `corepack enable && corepack prepare pnpm@10.4.1 --activate`.
+- Install from the repo root: `pnpm install --frozen-lockfile`.
+  - This installs all workspace packages so package-level bins (like `eslint`) exist.
+- Local bins only: any package running a tool in its scripts must declare it.
+  - Example: `packages/ui` runs `eslint`, so it declares `devDependencies.eslint`.
+- Keep lockfile in sync: commit `pnpm-lock.yaml` whenever deps change or CI with `--frozen-lockfile` will fail.
+- Minimal, reliable workflow (no caching needed):
+
+  ```yaml
+  name: CI
+  on:
+    push: { branches: [ main ] }
+    pull_request: { branches: [ main ] }
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v4
+          with: { node-version: '20' }
+        - name: Setup pnpm
+          run: |
+            corepack enable
+            corepack prepare pnpm@10.4.1 --activate
+        - run: pnpm install --frozen-lockfile
+        - run: pnpm lint
+        - run: pnpm typecheck
+  ```
+
+- Optional caching: cache the pnpm store to speed up installs; it’s safe to skip for simplicity.
+
 ## PR instructions
 
 - Title format: `[<package_name>] <Title>`
