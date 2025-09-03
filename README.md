@@ -83,6 +83,11 @@ import { Button } from "@workspace/ui/components/button"
 - Type-check all packages: `pnpm typecheck`
 - Type-check one package: `pnpm turbo run typecheck --filter <package_name>`
 
+## Continuous Integration
+
+- GitHub Actions workflow runs lint and typecheck on pushes and PRs to `main`.
+- File: `.github/workflows/ci.yml`
+
 ## Linting
 
 - ESLint 9 flat config is used per package:

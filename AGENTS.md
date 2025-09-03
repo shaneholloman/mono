@@ -19,6 +19,12 @@
   - Type-check all packages: `pnpm typecheck`
   - Type-check one package: `pnpm turbo run typecheck --filter <package_name>`
 
+## CI
+
+- GitHub Actions workflow runs on pushes and PRs to `main`:
+  - Location: `.github/workflows/ci.yml`
+  - Steps: install, lint, typecheck
+
 ## PR instructions
 
 - Title format: `[<package_name>] <Title>`
