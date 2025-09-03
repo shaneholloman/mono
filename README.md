@@ -88,6 +88,12 @@ import { Button } from "@workspace/ui/components/button"
 - GitHub Actions workflow runs lint and typecheck on pushes and PRs to `main`.
 - File: `.github/workflows/ci.yml`
 
+## Dependency Updates
+
+- Automated by Renovate using `renovate.json` at repo root.
+- Enable the Renovate GitHub App on this repo (or org).
+- Renovate opens PRs; existing CI runs on them. Minor/patch devDependencies may auto‑merge if checks pass.
+
 ## Linting
 
 - ESLint 9 flat config is used per package:
