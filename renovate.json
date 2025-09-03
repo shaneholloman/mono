@@ -12,7 +12,7 @@
   "rangeStrategy": "bump",
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["weekly"]
+    "schedule": ["on monday"]
   },
   "packageRules": [
     { "matchManagers": ["github-actions"], "groupName": "github-actions" },
@@ -25,4 +25,3 @@
   ],
   "ignoreDeps": ["@workspace/*"]
 }
-
