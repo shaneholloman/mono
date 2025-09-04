@@ -16,6 +16,9 @@
   },
   "packageRules": [
     { "matchManagers": ["github-actions"], "groupName": "github-actions" },
+    { "matchPackageNames": ["node"], "allowedVersions": "<22" },
+    { "matchPackageNames": ["@types/node"], "allowedVersions": "<21" },
+    { "matchPackageNames": ["pnpm"], "enabled": false },
     {
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["minor", "patch"],
